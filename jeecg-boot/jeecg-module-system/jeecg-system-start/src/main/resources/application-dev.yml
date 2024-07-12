@@ -176,7 +176,7 @@ spring:
     database: 0
     host: 192.168.2.171
     port: 6379
-    #password: ''
+    password: ''
 #mybatis plus 设置
 mybatis-plus:
   mapper-locations: classpath*:org/jeecg/**/xml/*Mapper.xml
