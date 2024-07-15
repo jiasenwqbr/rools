@@ -45,7 +45,7 @@ public class RoolDeploy implements Serializable {
     private java.lang.String serverId;
 	/**容器*/
 	@Excel(name = "容器", width = 15, dictTable = "rool_container", dicText = "container_id", dicCode = "id")
-	@Dict(dictTable = "rool_container", dicText = "container_id", dicCode = "id")
+	@Dict(dictTable = "rool_container", dicText = "container_name", dicCode = "id")
     @ApiModelProperty(value = "容器")
     private java.lang.String containerId;
 	/**描述*/
