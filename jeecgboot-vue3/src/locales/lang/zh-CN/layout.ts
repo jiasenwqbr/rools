@@ -1,5 +1,5 @@
 export default {
-  footer: { onlinePreview: 'JEECG首页', onlineDocument: '在线文档' },
+  footer: { onlinePreview: '首页', onlineDocument: '在线文档' },
   header: {
     // user dropdown
     dropdownItemDoc: '官网',
@@ -23,9 +23,9 @@ export default {
     lockScreenBtn: '锁定',
 
     home: '首页',
-    welcomeIn:"欢迎进入",
-    refreshCacheComplete: "刷新缓存完成！",
-    refreshCacheFailure: "刷新缓存失败！",
+    welcomeIn: '欢迎进入',
+    refreshCacheComplete: '刷新缓存完成！',
+    refreshCacheFailure: '刷新缓存失败！',
   },
   multipleTab: {
     reload: '刷 新',

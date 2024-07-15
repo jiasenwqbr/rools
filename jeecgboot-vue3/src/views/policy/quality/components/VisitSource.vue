@@ -61,10 +61,9 @@
               show: false,
             },
             data: [
-              { value: 1048, name: '搜索引擎' },
-              { value: 735, name: '直接访问' },
-              { value: 580, name: '邮件营销' },
-              { value: 484, name: '联盟广告' },
+              { value: 120, name: '系统调用' },
+              { value: 140, name: 'API' },
+              { value: 106, name: 'jar' },
             ],
             animationType: 'scale',
             animationEasing: 'exponentialInOut',

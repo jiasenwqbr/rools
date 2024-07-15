@@ -20,5 +20,5 @@
   import IndexBdc from './homePage/IndexBdc.vue';
   import IndexTask from './homePage/IndexTask.vue';
 
-  const indexStyle = ref(0);
+  const indexStyle = ref(1);
 </script>
