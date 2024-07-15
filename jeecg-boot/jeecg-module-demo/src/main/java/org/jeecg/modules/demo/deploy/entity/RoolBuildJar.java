@@ -1,13 +1,10 @@
 package org.jeecg.modules.demo.deploy.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -54,7 +51,7 @@ public class RoolBuildJar implements Serializable {
 	@Excel(name = "包扩展名", width = 15, dicCode = "extends")
 	@Dict(dicCode = "extends")
     @ApiModelProperty(value = "包扩展名")
-    private java.lang.String extends;
+    private java.lang.String extend;
 	/**版本*/
 	@Excel(name = "版本", width = 15)
     @ApiModelProperty(value = "版本")
