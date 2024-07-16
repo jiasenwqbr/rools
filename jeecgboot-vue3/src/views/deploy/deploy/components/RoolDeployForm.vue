@@ -1,6 +1,6 @@
 <template>
   <div style="min-height: 400px">
-    <BasicForm @register="registerForm"></BasicForm>
+    <BasicForm @register="registerForm" />
     <div style="width: 100%; text-align: center" v-if="!formDisabled">
       <a-button @click="submitForm" pre-icon="ant-design:check" type="primary">提 交</a-button>
     </div>
