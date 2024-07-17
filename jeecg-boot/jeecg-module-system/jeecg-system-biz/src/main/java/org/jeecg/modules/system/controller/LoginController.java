@@ -81,24 +81,24 @@ public class LoginController {
 		}
 
 		// step.1 验证码check
-        String captcha = sysLoginModel.getCaptcha();
-        if(captcha==null){
-            result.error500("验证码无效");
-            return result;
-        }
-        String lowerCaseCaptcha = captcha.toLowerCase();
-		// 加入密钥作为混淆，避免简单的拼接，被外部利用，用户自定义该密钥即可
-        String origin = lowerCaseCaptcha+sysLoginModel.getCheckKey()+jeecgBaseConfig.getSignatureSecret();
-		String realKey = Md5Util.md5Encode(origin, "utf-8");
-		Object checkCode = redisUtil.get(realKey);
-		//当进入登录页时，有一定几率出现验证码错误 #1714
-		if(checkCode==null || !checkCode.toString().equals(lowerCaseCaptcha)) {
-            log.warn("验证码错误，key= {} , Ui checkCode= {}, Redis checkCode = {}", sysLoginModel.getCheckKey(), lowerCaseCaptcha, checkCode);
-			result.error500("验证码错误");
-			// 改成特殊的code 便于前端判断
-			result.setCode(HttpStatus.PRECONDITION_FAILED.value());
-			return result;
-		}
+//        String captcha = sysLoginModel.getCaptcha();
+//        if(captcha==null){
+//            result.error500("验证码无效");
+//            return result;
+//        }
+//        String lowerCaseCaptcha = captcha.toLowerCase();
+//		// 加入密钥作为混淆，避免简单的拼接，被外部利用，用户自定义该密钥即可
+//        String origin = lowerCaseCaptcha+sysLoginModel.getCheckKey()+jeecgBaseConfig.getSignatureSecret();
+//		String realKey = Md5Util.md5Encode(origin, "utf-8");
+//		Object checkCode = redisUtil.get(realKey);
+//		//当进入登录页时，有一定几率出现验证码错误 #1714
+//		if(checkCode==null || !checkCode.toString().equals(lowerCaseCaptcha)) {
+//            log.warn("验证码错误，key= {} , Ui checkCode= {}, Redis checkCode = {}", sysLoginModel.getCheckKey(), lowerCaseCaptcha, checkCode);
+//			result.error500("验证码错误");
+//			// 改成特殊的code 便于前端判断
+//			result.setCode(HttpStatus.PRECONDITION_FAILED.value());
+//			return result;
+//		}
 		
 		// step.2 校验用户是否存在且有效
 		LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
@@ -122,7 +122,7 @@ public class LoginController {
 		userInfo(sysUser, result, request);
 
 		// step.5  登录成功删除验证码
-		redisUtil.del(realKey);
+		//redisUtil.del(realKey);
 		redisUtil.del(CommonConstant.LOGIN_FAIL + username);
 
 		// step.6  记录用户登录日志
