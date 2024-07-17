@@ -77,6 +77,15 @@ export function createPermissionGuard(router: Router) {
         //update-end---author:wangshuai ---date:20230224  for：[QQYUN-3440]新建企业微信和钉钉配置表，通过租户模式隔离------------
         return;
         //update-end---author:wangshuai ---date:20220629  for：[issues/I5BG1I]vue3不支持auth2登录------------
+      } else if (to.path === NO_LOGIN && isOAuth2AppEnv() && token) {
+        const isSessionTimeout = userStore.getSessionTimeout;
+        try {
+          if (!isSessionTimeout) {
+            next((to.query?.redirect as string) || '/');
+            return;
+          } else {
+          }
+        } catch {}
       }
       next();
       return;

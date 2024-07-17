@@ -39,6 +39,17 @@ export const LoginRoute: AppRouteRecordRaw = {
   },
 };
 
+export const NoLoginRoute: AppRouteRecordRaw = {
+  path: '/nologin',
+  name: 'NoLogin',
+  //新版后台登录，如果想要使用旧版登录放开即可
+  // component: () => import('/@/views/sys/login/Login.vue'),
+  component: () => import('/@/views/system/loginmini/Nologin.vue'),
+  meta: {
+    title: t('routes.basic.login'),
+  },
+};
+
 //update-begin---author:wangshuai ---date:20220629  for：auth2登录页面路由------------
 export const Oauth2LoginRoute: AppRouteRecordRaw = {
   path: '/oauth2-app/login',
@@ -65,4 +76,13 @@ export const TokenLoginRoute: AppRouteRecordRaw = {
   },
 };
 // Basic routing without permission
-export const basicRoutes = [LoginRoute, RootRoute, ...mainOutRoutes, REDIRECT_ROUTE, PAGE_NOT_FOUND_ROUTE, TokenLoginRoute, Oauth2LoginRoute];
+export const basicRoutes = [
+  LoginRoute,
+  RootRoute,
+  ...mainOutRoutes,
+  REDIRECT_ROUTE,
+  PAGE_NOT_FOUND_ROUTE,
+  TokenLoginRoute,
+  Oauth2LoginRoute,
+  NoLoginRoute,
+];

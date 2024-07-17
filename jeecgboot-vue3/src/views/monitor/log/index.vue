@@ -2,9 +2,9 @@
   <BasicTable :ellipsis="true" @register="registerTable" :searchInfo="searchInfo" :columns="logColumns" :expand-column-width="16">
     <template #tableTitle>
       <a-tabs defaultActiveKey="4" @change="tabChange" size="small">
-        <a-tab-pane tab="异常日志" key="4"></a-tab-pane>
-        <a-tab-pane tab="登录日志" key="1"></a-tab-pane>
-        <a-tab-pane tab="操作日志" key="2"></a-tab-pane>
+        <a-tab-pane tab="异常日志" key="4" />
+        <a-tab-pane tab="登录日志" key="1" />
+        <a-tab-pane tab="操作日志" key="2" />
       </a-tabs>
     </template>
     <template #expandedRowRender="{ record }">
