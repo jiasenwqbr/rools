@@ -27,6 +27,7 @@ import org.jeecg.modules.system.service.ISysThirdAppConfigService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.service.impl.ThirdAppDingtalkServiceImpl;
 import org.jeecg.modules.system.service.impl.ThirdAppWechatEnterpriseServiceImpl;
+import org.jeecg.modules.system.vo.SsoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -39,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author scott
@@ -528,4 +530,17 @@ public class ThirdLoginController {
 			return Result.error("注册失败");
 		}
 	}
+	@ResponseBody
+	@PostMapping("/getSsoLogin")
+	public Result<SsoData> getSsoLogin(@RequestBody Map<String,String> param){
+		String username = param.get("username");
+		String password = param.get("password");
+
+
+
+		return null;
+
+	}
+
+
 }

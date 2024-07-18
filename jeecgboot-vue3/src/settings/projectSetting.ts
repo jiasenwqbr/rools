@@ -65,7 +65,7 @@ const setting: ProjectConfig = {
   // 头部配置
   headerSetting: {
     // 背景色
-    bgColor: HEADER_PRESET_BG_COLOR_LIST[4],
+    bgColor: HEADER_PRESET_BG_COLOR_LIST[1],
     // 固定头部
     fixed: true,
     // 是否显示顶部
@@ -87,7 +87,7 @@ const setting: ProjectConfig = {
   // 菜单配置
   menuSetting: {
     // 背景色
-    bgColor: SIDE_BAR_BG_COLOR_LIST[0],
+    bgColor: SIDE_BAR_BG_COLOR_LIST[3],
     // 是否固定住左侧菜单
     fixed: true,
     // 菜单折叠
@@ -104,7 +104,7 @@ const setting: ProjectConfig = {
     // 菜单宽度
     menuWidth: 210,
     // 菜单模式
-    mode: MenuModeEnum.INLINE,
+    mode: MenuModeEnum.VERTICAL_RIGHT,
     // 菜单类型
     type: MenuTypeEnum.SIDEBAR,
     // 菜单主题
@@ -118,7 +118,7 @@ const setting: ProjectConfig = {
     // 手风琴模式，只展示一个菜单
     accordion: true,
     // 在路由切换的时候关闭左侧混合菜单展开菜单
-    closeMixSidebarOnChange: false,
+    closeMixSidebarOnChange: true,
     // 左侧混合菜单模块切换触发方式 ‘click’ |'hover'
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,
     // 是否固定左侧混合菜单

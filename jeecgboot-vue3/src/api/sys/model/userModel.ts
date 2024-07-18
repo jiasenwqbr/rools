@@ -6,6 +6,10 @@ export interface LoginParams {
   password: string;
 }
 
+export interface SsoLoginParams {
+  account: string;
+  password: string;
+}
 export interface ThirdLoginParams {
   token: string;
   thirdType: string;
@@ -23,7 +27,7 @@ export interface LoginResultModel {
   userId: string | number;
   token: string;
   role: RoleInfo;
-  userInfo?: any
+  userInfo?: any;
 }
 
 /**
