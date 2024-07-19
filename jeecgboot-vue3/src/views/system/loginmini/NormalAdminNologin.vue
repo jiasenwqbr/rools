@@ -23,14 +23,15 @@
     try {
       await userStore.doLogout2();
     } catch (error) {}
+
     try {
       loginLoading.value = true;
       const { userInfo } = await userStore.login(
         toRaw({
-          password: '123456',
-          username: 'admin',
-          captcha: '1',
-          checkKey: '1',
+          password: 'normal_admin123',
+          username: 'normal_admin',
+          captcha: '2',
+          checkKey: '2',
           mode: 'none', //不要默认的错误提示
         })
       );

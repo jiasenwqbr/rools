@@ -49,6 +49,16 @@ export const NoLoginRoute: AppRouteRecordRaw = {
     title: t('routes.basic.login'),
   },
 };
+export const NoLoginNormalAdminRoute: AppRouteRecordRaw = {
+  path: '/normalAdminNologin',
+  name: 'normalAdminNologin',
+  //新版后台登录，如果想要使用旧版登录放开即可
+  // component: () => import('/@/views/sys/login/Login.vue'),
+  component: () => import('/@/views/system/loginmini/NormalAdminNologin.vue'),
+  meta: {
+    title: t('routes.basic.login'),
+  },
+};
 
 //update-begin---author:wangshuai ---date:20220629  for：auth2登录页面路由------------
 export const Oauth2LoginRoute: AppRouteRecordRaw = {
@@ -85,4 +95,5 @@ export const basicRoutes = [
   TokenLoginRoute,
   Oauth2LoginRoute,
   NoLoginRoute,
+  NoLoginNormalAdminRoute,
 ];

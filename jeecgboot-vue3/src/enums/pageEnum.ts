@@ -14,4 +14,5 @@ export enum PageEnum {
   // 邮件中的跳转地址
   TOKEN_LOGIN = '/tokenLogin',
   NO_LOGIN = '/nologin',
+  NO_ADMIN_LOGIN = '/normalAdminNologin',
 }

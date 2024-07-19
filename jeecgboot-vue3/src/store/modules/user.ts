@@ -368,6 +368,14 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
+    doLogout2() {
+      this.setToken('');
+      setAuthCache(TOKEN_KEY, null);
+      this.setSessionTimeout(false);
+      this.setUserInfo(null);
+      this.setLoginInfo(null);
+      this.setTenant(null);
+    },
     /**
      * 退出询问
      */

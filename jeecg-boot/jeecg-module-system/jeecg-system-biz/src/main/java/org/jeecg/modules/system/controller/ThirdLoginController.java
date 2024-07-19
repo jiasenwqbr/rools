@@ -530,6 +530,8 @@ public class ThirdLoginController {
 			return Result.error("注册失败");
 		}
 	}
+
+
 	@ResponseBody
 	@PostMapping("/getSsoLogin")
 	public Result<SsoData> getSsoLogin(@RequestBody Map<String,String> param){

@@ -24,12 +24,13 @@ const SYS_FILES_PATH = PageEnum.SYS_FILES_PATH;
 const TOKEN_LOGIN = PageEnum.TOKEN_LOGIN;
 
 const NO_LOGIN = PageEnum.NO_LOGIN;
+const NO_ADMIN_LOGIN = PageEnum.NO_ADMIN_LOGIN;
 
 const ROOT_PATH = RootRoute.path;
 
 //update-begin---author:wangshuai ---date:20220629  for：[issues/I5BG1I]vue3不支持auth2登录------------
 //update-begin---author:wangshuai ---date:20221111  for: [VUEN-2472]分享免登录------------
-const whitePathList: PageEnum[] = [LOGIN_PATH, OAUTH2_LOGIN_PAGE_PATH, SYS_FILES_PATH, TOKEN_LOGIN, NO_LOGIN];
+const whitePathList: PageEnum[] = [LOGIN_PATH, OAUTH2_LOGIN_PAGE_PATH, SYS_FILES_PATH, TOKEN_LOGIN, NO_LOGIN, NO_ADMIN_LOGIN];
 //update-end---author:wangshuai ---date:20221111  for: [VUEN-2472]分享免登录------------
 //update-end---author:wangshuai ---date:20220629  for：[issues/I5BG1I]vue3不支持auth2登录------------
 
