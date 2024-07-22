@@ -31,7 +31,7 @@
       setOptions({
         legend: {
           bottom: 0,
-          data: ['访问', '购买'],
+          data: ['输入', '输出'],
         },
         tooltip: {},
         radar: {
@@ -39,22 +39,22 @@
           splitNumber: 8,
           indicator: [
             {
-              name: '电脑',
+              name: '数据对象',
             },
             {
-              name: '充电器',
+              name: 'DRL',
             },
             {
-              name: '耳机',
+              name: 'DSL',
             },
             {
-              name: '手机',
+              name: '语言定义',
             },
             {
-              name: 'Ipad',
+              name: '向导规则',
             },
             {
-              name: '耳机',
+              name: '文本',
             },
           ],
         },

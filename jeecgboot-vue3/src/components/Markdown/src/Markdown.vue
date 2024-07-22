@@ -23,7 +23,7 @@
     },
     emits: ['change', 'get', 'update:value'],
     setup(props, { attrs, emit }) {
-      console.log("---Markdown---初始化---")
+      console.log('---Markdown---初始化---');
       const wrapRef = ref<ElRef>(null);
       const vditorRef = ref(null) as Ref<Nullable<Vditor>>;
       const initedRef = ref(false);
@@ -149,7 +149,7 @@
             },
           ],
           // update-end--author:liaozhiyang---date:20240520---for：【TV360X-146】Markdown组件去掉录音选项
-          mode: 'sv',
+          mode: 'ir',
           // cdn: 'https://cdn.jsdelivr.net/npm/vditor@3.9.6',
           cdn: 'https://unpkg.com/vditor@3.10.1',
           fullscreen: {

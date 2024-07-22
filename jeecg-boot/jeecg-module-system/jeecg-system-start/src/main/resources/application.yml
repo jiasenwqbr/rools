@@ -2,4 +2,4 @@ spring:
   application:
     name: rool
   profiles:
-    active: '@profile.name@'
+    active: dev

@@ -1,5 +1,5 @@
 <template>
-  <Card title="成交占比" :loading="loading">
+  <Card title="占比" :loading="loading">
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>
@@ -41,10 +41,10 @@
             center: ['50%', '50%'],
             color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
             data: [
-              { value: 500, name: '电子产品' },
-              { value: 310, name: '服装' },
-              { value: 274, name: '化妆品' },
-              { value: 400, name: '家居' },
+              { value: 500, name: '数据对象' },
+              { value: 310, name: 'DSL' },
+              { value: 274, name: 'DRL' },
+              { value: 400, name: '向导规则' },
             ].sort(function (a, b) {
               return a.value - b.value;
             }),

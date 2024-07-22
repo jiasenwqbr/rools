@@ -11,14 +11,14 @@
           <template #overlay>
             <a-menu>
               <a-menu-item key="1" @click="batchHandleDelete">
-                <Icon icon="ant-design:delete-outlined"></Icon>
+                <Icon icon="ant-design:delete-outlined" />
                 删除
               </a-menu-item>
             </a-menu>
           </template>
           <a-button
             >批量操作
-            <Icon icon="mdi:chevron-down"></Icon>
+            <Icon icon="mdi:chevron-down" />
           </a-button>
         </a-dropdown>
         <!-- 高级查询 -->
@@ -32,7 +32,7 @@
       <template v-slot:bodyCell="{ column, record, index, text }"> </template>
     </BasicTable>
     <!-- 表单区域 -->
-    <RoolDrlObjectModal @register="registerModal" @success="handleSuccess"></RoolDrlObjectModal>
+    <RoolDrlObjectModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 
@@ -158,6 +158,10 @@
       },
       {
         label: '详情',
+        onClick: handleDetail.bind(null, record),
+      },
+      {
+        label: '查看源码',
         onClick: handleDetail.bind(null, record),
       },
     ];
