@@ -1,6 +1,7 @@
 package org.jeecg.modules.system.controller;
 
 import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.exceptions.ClientException;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -31,14 +32,22 @@ import org.jeecg.modules.system.service.impl.SysBaseApiImpl;
 import org.jeecg.modules.system.util.RandImageUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @Author scott
@@ -69,6 +78,13 @@ public class LoginController {
 	private JeecgBaseConfig jeecgBaseConfig;
 
 	private final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+
+	@Value("${mutiSso.adminUrl}")
+	private String adminUrl;
+	@Value("${mutiSso.normalAdmin}")
+	private String normalAdmin;
+	@Value("${mutiSso.ssoUrl}")
+	private String ssoUrl;
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -715,6 +731,9 @@ public class LoginController {
 		return Result.OK(result);
 	}
 
+
+
+
 	/**
 	 * 登录失败超出次数5 返回true
 	 * @param username
@@ -824,5 +843,48 @@ public class LoginController {
 		redisUtil.removeAll(realKey);
 		return Result.ok();
 	}
+
+
+	@GetMapping("/tokenLogin")
+	public RedirectView tokenLogin(@RequestHeader Map<String,String> param){
+		String authorization = param.get("authorization");
+		HttpHeaders headers = getHeaders();
+		headers.set("authorization", authorization);
+        // 请求方式是 GET 代表获取数据
+		HttpMethod method = HttpMethod.GET;
+		System.out.println("请求地址：" + ssoUrl);
+        System.out.println("请求方式：" + method);
+		ResponseEntity<JSONObject> result = RestUtil.request(ssoUrl, method, headers, null, null, JSONObject.class);
+        boolean isAdmin = false;
+		if (result != null && result.getBody() != null) {
+            System.out.println("返回结果：" + result.getBody().toJSONString());
+			JSONObject user = result.getBody().getJSONObject("user");
+			if (user!=null){
+				JSONArray roles = user.getJSONArray("roles");
+				if (roles!=null && roles.size()>0){
+					for (int i = 0;i<roles.size();i++){
+						JSONObject jsonObject = roles.getJSONObject(i);
+						if (jsonObject.getString("name")!=null && "admin".equals(jsonObject.getString("name"))){
+							isAdmin = true;
+						}
+					}
+				}
+			}
+		} else {
+            System.out.println("查询失败");
+        }
+		if (isAdmin){
+			return new RedirectView(adminUrl);
+		} else {
+			return new RedirectView(normalAdmin);
+		}
+	}
+	private static HttpHeaders getHeaders() {
+      HttpHeaders headers = new HttpHeaders();
+        String mediaType = MediaType.APPLICATION_JSON_VALUE;
+        headers.setContentType(MediaType.parseMediaType(mediaType));
+        headers.set("Accept", mediaType);
+        return headers;
+    }
 	
 }
