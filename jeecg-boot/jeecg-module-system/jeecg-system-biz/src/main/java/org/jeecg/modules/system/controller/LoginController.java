@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
@@ -29,6 +31,7 @@ import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.model.SysLoginModel;
 import org.jeecg.modules.system.service.*;
 import org.jeecg.modules.system.service.impl.SysBaseApiImpl;
+import org.jeecg.modules.system.util.CurlToJava;
 import org.jeecg.modules.system.util.RandImageUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +44,10 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -85,6 +92,8 @@ public class LoginController {
 	private String normalAdmin;
 	@Value("${mutiSso.ssoUrl}")
 	private String ssoUrl;
+	@Value("${mutiSso.error}")
+	private String error;
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -845,8 +854,8 @@ public class LoginController {
 	}
 
 
-	@GetMapping("/tokenLogin")
-	public RedirectView tokenLogin(@RequestHeader Map<String,String> param){
+	@GetMapping("/tokenLogin1")
+	public RedirectView tokenLogin1(@RequestHeader Map<String,String> param){
 		String authorization = param.get("authorization");
 		HttpHeaders headers = getHeaders();
 		headers.set("authorization", authorization);
@@ -886,5 +895,43 @@ public class LoginController {
         headers.set("Accept", mediaType);
         return headers;
     }
-	
+
+	@GetMapping("/authLogin")
+	public RedirectView authLogin(@RequestParam("token") String token) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+		String responseBody  = CurlToJava.doGet(ssoUrl, token);
+		//String responseBody = EntityUtils.toString(httpEntity);
+		System.out.println("ResponseBody: " + responseBody);
+		boolean isAdmin = false;
+		if (responseBody != null && !"".equals(responseBody)) {
+			JSONObject jsonObject = JSONObject.parseObject(responseBody);
+			JSONObject user = jsonObject.getJSONObject("user");
+			if (user!=null){
+				JSONArray roles = user.getJSONArray("roles");
+				if (roles!=null && roles.size()>0){
+					for (int i = 0;i<roles.size();i++){
+						JSONObject jsObject = roles.getJSONObject(i);
+						if (jsObject.getString("name")!=null && "admin".equals(jsObject.getString("name"))){
+							isAdmin = true;
+						}
+					}
+				}
+			}
+		} else {
+			return new RedirectView(error);
+		}
+		if (isAdmin){
+			return new RedirectView(adminUrl);
+		} else {
+			return new RedirectView(normalAdmin);
+		}
+	}
+
+
+
+	@GetMapping("/auth2")
+	public RedirectView auth2(@RequestParam("token") String token){
+		System.out.println("auth.............:"+token);
+		return new RedirectView(error);
+	}
+
 }

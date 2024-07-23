@@ -327,4 +327,5 @@ mutiSso:
   adminUrl: http://10.200.160.236:8887/nologin
   normalAdmin: http://10.200.160.236:8887/normalAdminNologin
   ssoUrl: https://10.200.160.236:7857/api/info
+  error: http://10.200.160.236:8887/nologin
 

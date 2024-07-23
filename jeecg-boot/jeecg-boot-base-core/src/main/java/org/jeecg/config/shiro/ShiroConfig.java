@@ -111,6 +111,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/sys/getQrcodeToken/**", "anon"); //监听扫码
         filterChainDefinitionMap.put("/sys/checkAuth", "anon"); //授权接口排除
         filterChainDefinitionMap.put("/sys/tokenLogin", "anon");
+        filterChainDefinitionMap.put("/sys/authLogin", "anon");
+        filterChainDefinitionMap.put("/sys/auth2", "anon");
 
 
         //update-begin--Author:scott Date:20221116 for：排除静态资源后缀
