@@ -94,6 +94,8 @@ public class LoginController {
 	private String ssoUrl;
 	@Value("${mutiSso.error}")
 	private String error;
+	@Value("${mutiSso.ssoAddress}")
+	private String ssoAddress;
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -898,8 +900,10 @@ public class LoginController {
 
 	@GetMapping("/authLogin")
 	public RedirectView authLogin(@RequestParam("token") String token) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+		if (token==null || "".equals(token)){
+			return new RedirectView(ssoAddress);
+		}
 		String responseBody  = CurlToJava.doGet(ssoUrl, token);
-		//String responseBody = EntityUtils.toString(httpEntity);
 		System.out.println("ResponseBody: " + responseBody);
 		boolean isAdmin = false;
 		if (responseBody != null && !"".equals(responseBody)) {
@@ -925,13 +929,4 @@ public class LoginController {
 			return new RedirectView(normalAdmin);
 		}
 	}
-
-
-
-	@GetMapping("/auth2")
-	public RedirectView auth2(@RequestParam("token") String token){
-		System.out.println("auth.............:"+token);
-		return new RedirectView(error);
-	}
-
 }

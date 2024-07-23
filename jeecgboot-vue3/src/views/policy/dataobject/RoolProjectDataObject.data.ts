@@ -139,6 +139,7 @@ export const roolDataObjectCodeFormSchema: FormSchema[] = [
     label: '源代码',
     field: 'code',
     component: 'JMarkdownEditor',
+    colProps: { span: 42 },
   },
   {
     label: '',
