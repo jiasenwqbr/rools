@@ -28,8 +28,8 @@
       loginLoading.value = true;
       const { userInfo } = await userStore.login(
         toRaw({
-          password: 'normal_admin123',
-          username: 'normal_admin',
+          password: 'Jxsn#123456',
+          username: 'user072416',
           captcha: '2',
           checkKey: '2',
           mode: 'none', //不要默认的错误提示

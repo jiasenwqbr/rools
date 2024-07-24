@@ -27,7 +27,7 @@
       loginLoading.value = true;
       const { userInfo } = await userStore.login(
         toRaw({
-          password: '123456',
+          password: 'Jxsn#123456',
           username: 'admin',
           captcha: '1',
           checkKey: '1',

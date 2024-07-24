@@ -32,12 +32,12 @@
       },
       yAxis: {
         type: 'value',
-        max: 8000,
+        max: 800,
         splitNumber: 4,
       },
       series: [
         {
-          data: [3000, 2000, 3333, 5000, 3200, 4200, 3200, 2100, 3000, 5100, 6000, 3200, 4800],
+          data: [300, 200, 333, 500, 320, 420, 320, 210, 300, 510, 600, 320, 480],
           type: 'bar',
           barMaxWidth: 80,
           color: getThemeColor.value,

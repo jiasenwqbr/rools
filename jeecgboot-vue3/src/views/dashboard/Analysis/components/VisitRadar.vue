@@ -1,5 +1,5 @@
 <template>
-  <Card title="使用率" :loading="loading">
+  <Card title="规则应用统计" :loading="loading">
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>

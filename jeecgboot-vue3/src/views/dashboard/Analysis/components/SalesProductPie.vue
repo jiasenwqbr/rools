@@ -1,5 +1,5 @@
 <template>
-  <Card title="占比" :loading="loading">
+  <Card title="规则调用异常占比" :loading="loading">
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>

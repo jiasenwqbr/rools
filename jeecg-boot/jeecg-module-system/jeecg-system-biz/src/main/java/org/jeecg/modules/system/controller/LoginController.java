@@ -96,6 +96,8 @@ public class LoginController {
 	private String error;
 	@Value("${mutiSso.ssoAddress}")
 	private String ssoAddress;
+	@Value("${mutiSso.loginUrl}")
+	private String loginUrl;
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -899,11 +901,11 @@ public class LoginController {
     }
 
 	@GetMapping("/authLogin")
-	public RedirectView authLogin(@RequestParam("token") String token) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
-		if (token==null || "".equals(token)){
-			return new RedirectView(ssoAddress);
+	public RedirectView authLogin(@RequestParam(value = "refresh",required = false) String refresh) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+		if (refresh==null || "".equals(refresh)){
+			return new RedirectView(loginUrl);
 		}
-		String responseBody  = CurlToJava.doGet(ssoUrl, token);
+		String responseBody  = CurlToJava.doGet(ssoUrl, refresh);
 		System.out.println("ResponseBody: " + responseBody);
 		boolean isAdmin = false;
 		if (responseBody != null && !"".equals(responseBody)) {
@@ -929,4 +931,39 @@ public class LoginController {
 			return new RedirectView(normalAdmin);
 		}
 	}
+
+	/**
+	 * 退出登录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/logoutSso")
+	public RedirectView logoutSso(HttpServletRequest request,HttpServletResponse response) {
+		//用户退出逻辑
+		String token = request.getHeader(CommonConstant.X_ACCESS_TOKEN);
+		if(oConvertUtils.isEmpty(token)) {
+			return  new RedirectView(loginUrl);
+		}
+		String username = JwtUtil.getUsername(token);
+		LoginUser sysUser = sysBaseApi.getUserByName(username);
+		if(sysUser!=null) {
+			//update-begin--Author:wangshuai  Date:20200714  for：登出日志没有记录人员
+			baseCommonService.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null,sysUser);
+			//update-end--Author:wangshuai  Date:20200714  for：登出日志没有记录人员
+			log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
+			//清空用户登录Token缓存
+			redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
+			//清空用户登录Shiro权限缓存
+			redisUtil.del(CommonConstant.PREFIX_USER_SHIRO_CACHE + sysUser.getId());
+			//清空用户的缓存信息（包括部门信息），例如sys:cache:user::<username>
+			redisUtil.del(String.format("%s::%s", CacheConstant.SYS_USERS_CACHE, sysUser.getUsername()));
+			//调用shiro的logout
+			SecurityUtils.getSubject().logout();
+			return  new RedirectView(loginUrl);
+		}else {
+			return  new RedirectView(loginUrl);
+		}
+	}
+
 }
