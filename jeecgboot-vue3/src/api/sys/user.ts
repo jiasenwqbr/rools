@@ -15,6 +15,7 @@ enum Api {
   Login = '/sys/login',
   phoneLogin = '/sys/phoneLogin',
   Logout = '/sys/logout',
+  LogoutSSO = '/sys/logoutSso',
   GetUserInfo = '/sys/user/getUserInfo',
   // 获取系统权限
   // 1、查询用户拥有的按钮/表单访问权限
@@ -112,7 +113,8 @@ export function getPermCode() {
 }
 
 export function doLogout() {
-  return defHttp.get({ url: Api.Logout });
+  //return defHttp.get({ url: Api.LogoutSSO });
+  window.location.href = 'http://10.200.164.209:8088/rool/sys/logoutSso';
 }
 
 export function getCodeInfo(currdatetime) {

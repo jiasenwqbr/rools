@@ -329,4 +329,5 @@ mutiSso:
   ssoUrl: https://10.200.160.236:7857/api/info
   error: http://10.200.160.236:8887/nologin
   ssoAddress: http://10.200.160.236:8887
+  loginUrl: https://10.200.160.236:7857/login?redirect_uri=http://10.200.164.209:8088/rool/sys/authLogin
 

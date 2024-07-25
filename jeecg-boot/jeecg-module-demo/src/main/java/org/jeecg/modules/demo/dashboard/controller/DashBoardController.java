@@ -32,7 +32,7 @@ public class DashBoardController {
     @Autowired
     private IRoolDslObjectService roolDslObjectService;
 
-    @GetMapping("getGroupCardData")
+    @GetMapping("/getGroupCardData")
     public Result<List<CardData>> getGroupCardData(){
 
         long dataObjectCount = roolDataObjectService.count();

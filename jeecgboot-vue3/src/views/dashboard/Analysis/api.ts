@@ -3,7 +3,7 @@ import { defHttp } from '/@/utils/http/axios';
 enum Api {
   loginfo = '/sys/loginfo',
   visitInfo = '/sys/visitInfo',
-  groupCardData = '/sys/getGroupCardData',
+  groupCardData = '/dashboard/getGroupCardData',
 }
 /**
  * 日志统计信息

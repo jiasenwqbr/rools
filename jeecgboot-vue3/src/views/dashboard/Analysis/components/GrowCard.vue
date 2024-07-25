@@ -1,6 +1,6 @@
 <template>
   <div class="md:flex">
-    <template v-for="(item, index) in growCardList" :key="item.title">
+    <template v-for="(item, index) in growCardList1" :key="item.title">
       <Card
         size="small"
         :loading="loading"
@@ -27,10 +27,24 @@
   </div>
 </template>
 <script lang="ts" setup>
+  import { ref } from 'vue';
   import { CountTo } from '/@/components/CountTo/index';
   import { Icon } from '/@/components/Icon';
   import { Tag, Card } from 'ant-design-vue';
-  import { growCardList } from '../data';
+  import { getGroupCardData } from '../api';
+  console.log('getGroupCardData', getGroupCardData);
+  let growCardList1 = ref([]);
+
+  getGroupCardData().then((res) => {
+    if (res.success) {
+      console.log(JSON.stringify(res));
+      growCardList1.value = res.result;
+    }
+  });
+
+  // watch(() => {
+  //   initCardlist();
+  // });
 
   defineProps({
     loading: {
