@@ -49,6 +49,12 @@
   const queryParam = reactive<any>({});
   const checkedKeys = ref<Array<string | number>>([]);
   const userStore = useUserStore();
+  const token = userStore.getToken;
+  const access = userStore.getAccess;
+  const refresh = userStore.getRefresh;
+  console.log('token', token);
+  console.log('access', access);
+  console.log('refresh', refresh);
   //注册model
   const [registerModal, { openModal }] = useModal();
   //注册table数据

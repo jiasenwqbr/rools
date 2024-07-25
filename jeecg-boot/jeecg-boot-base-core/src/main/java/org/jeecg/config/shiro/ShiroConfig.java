@@ -114,7 +114,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/sys/authLogin", "anon");
         filterChainDefinitionMap.put("/sys/auth2", "anon");
         filterChainDefinitionMap.put("/sys/logoutSso", "anon");
-
+        filterChainDefinitionMap.put("/sys/nologinTest", "anon");
 
         //update-begin--Author:scott Date:20221116 for：排除静态资源后缀
         filterChainDefinitionMap.put("/", "anon");

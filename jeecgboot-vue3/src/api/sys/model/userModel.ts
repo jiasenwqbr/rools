@@ -4,6 +4,8 @@
 export interface LoginParams {
   username: string;
   password: string;
+  access?: string;
+  refresh?: string;
 }
 
 export interface SsoLoginParams {

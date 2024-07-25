@@ -4,7 +4,17 @@ import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import { RoleEnum } from '/@/enums/roleEnum';
 import { PageEnum } from '/@/enums/pageEnum';
-import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY, LOGIN_INFO_KEY, DB_DICT_DATA_KEY, TENANT_ID, OAUTH2_THIRD_LOGIN_TENANT_ID } from '/@/enums/cacheEnum';
+import {
+  ROLES_KEY,
+  TOKEN_KEY,
+  ACCESS_KEY,
+  REFRESH_KEY,
+  USER_INFO_KEY,
+  LOGIN_INFO_KEY,
+  DB_DICT_DATA_KEY,
+  TENANT_ID,
+  OAUTH2_THIRD_LOGIN_TENANT_ID,
+} from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache, removeAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams, ThirdLoginParams } from '/@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi, phoneLoginApi, thirdLogin } from '/@/api/sys/user';
@@ -33,6 +43,8 @@ interface UserState {
   tenantid?: string | number;
   shareTenantId?: Nullable<string | number>;
   loginInfo?: Nullable<LoginInfo>;
+  access?: string;
+  refresh?: string;
 }
 
 export const useUserStore = defineStore({
@@ -71,6 +83,12 @@ export const useUserStore = defineStore({
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
     },
+    getAccess(): string {
+      return this.access || getAuthCache<string>(ACCESS_KEY);
+    },
+    getRefresh(): string {
+      return this.refresh || getAuthCache<string>(REFRESH_KEY);
+    },
     getAllDictItems(): [] {
       return this.dictItems || getAuthCache(DB_DICT_DATA_KEY);
     },
@@ -95,6 +113,14 @@ export const useUserStore = defineStore({
     setToken(info: string | undefined) {
       this.token = info ? info : ''; // for null or undefined value
       setAuthCache(TOKEN_KEY, info);
+    },
+    setAccess(access: string | undefined) {
+      this.access = access ? access : '';
+      setAuthCache(ACCESS_KEY, access);
+    },
+    setRefresh(refresh: string | undefined) {
+      this.refresh = refresh ? refresh : '';
+      setAuthCache(REFRESH_KEY, refresh);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;
@@ -153,12 +179,18 @@ export const useUserStore = defineStore({
         const { goHome = true, mode, ...loginParams } = params;
         const data = await loginApi(loginParams, mode);
         const { token, userInfo } = data;
-        // save sso token
-        // const dataSso = await loginApi(loginParams, mode);
-        // const { token, userInfo } = dataSso;
+
         // save token
         this.setToken(token);
         this.setTenant(userInfo.loginTenantId);
+        console.log('this.access:', this.access);
+        console.log('this.refresh', this.refresh);
+        console.log('params.access:', params.access);
+        console.log('params.refresh', params.refresh);
+        // save sso token
+        this.setAccess(params.access);
+        this.setRefresh(params.refresh);
+
         return this.afterLoginAction(goHome, data);
       } catch (error) {
         return Promise.reject(error);

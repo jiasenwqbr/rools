@@ -1,5 +1,7 @@
 // token key
 export const TOKEN_KEY = 'TOKEN__';
+export const ACCESS_KEY = 'ACCESS__';
+export const REFRESH_KEY = 'REFRESH__';
 
 export const LOCALE_KEY = 'LOCALE__';
 
@@ -47,7 +49,7 @@ export const JEECG_CHAT_KEY = 'JEECG-CHAT-KEY';
 // 【QQYUN-8925】系统主题颜色（供页面加载使用）
 export const APP__THEME__COLOR = '__APP__THEME__COLOR__';
 
-// 
+//
 export const ROLE_AUTH_CONFIG_KEY = 'ROLE__AUTH__CONFIG__KEY__';
 
 export enum CacheTypeEnum {

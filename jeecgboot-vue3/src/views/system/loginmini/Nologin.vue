@@ -7,10 +7,19 @@
   import { useUserStore } from '/@/store/modules/user';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useI18n } from '/@/hooks/web/useI18n';
-
+  import { useRouter } from 'vue-router';
   const { notification } = useMessage();
   const userStore = useUserStore();
   const { t } = useI18n();
+
+  const { currentRoute } = useRouter();
+  const route = currentRoute.value;
+  console.log('route', JSON.stringify(route));
+  const access = route.query.access;
+  const refresh = route.query.refresh;
+
+  console.log('access:', access);
+  console.log('refresh:', refresh);
 
   const loginLoading = ref<boolean>(false);
   defineProps({
@@ -32,6 +41,8 @@
           captcha: '1',
           checkKey: '1',
           mode: 'none', //不要默认的错误提示
+          access: access,
+          refresh: refresh,
         })
       );
       if (userInfo) {

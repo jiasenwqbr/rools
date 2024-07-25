@@ -98,6 +98,8 @@ public class LoginController {
 	private String ssoAddress;
 	@Value("${mutiSso.loginUrl}")
 	private String loginUrl;
+	@Value("${mutiSso.testUrl}")
+	private String testUrl;
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -901,7 +903,8 @@ public class LoginController {
     }
 
 	@GetMapping("/authLogin")
-	public RedirectView authLogin(@RequestParam(value = "refresh",required = false) String refresh) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
+	public RedirectView authLogin(@RequestParam(value = "refresh",required = false) String refresh,
+								  @RequestParam(value = "access",required = false) String access) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
 		if (refresh==null || "".equals(refresh)){
 			return new RedirectView(loginUrl);
 		}
@@ -923,12 +926,12 @@ public class LoginController {
 				}
 			}
 		} else {
-			return new RedirectView(error);
+			return new RedirectView(loginUrl);
 		}
 		if (isAdmin){
-			return new RedirectView(adminUrl);
+			return new RedirectView(adminUrl+"?refresh="+refresh+"&access="+access);
 		} else {
-			return new RedirectView(normalAdmin);
+			return new RedirectView(normalAdmin+"?refresh="+refresh+"&access="+access);
 		}
 	}
 
@@ -966,4 +969,9 @@ public class LoginController {
 		}
 	}
 
+	@RequestMapping(value = "/nologinTest")
+	public RedirectView nologinTest(@RequestParam(value = "refresh",required = false) String refresh,@RequestParam(value = "access",required = false) String access){
+		RedirectView redirectView = new RedirectView(testUrl+"?refresh="+refresh+"&access="+access);
+		return redirectView;
+	}
 }
