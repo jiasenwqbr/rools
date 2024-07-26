@@ -17,7 +17,7 @@
   const refresh = userStore.getRefresh;
   console.log('access:', access);
   console.log('refresh:', refresh);
-  const ifurl = 'https://10.200.160.236:7857/manage/group?noNavBar=true&access=' + refresh + '&refresh=' + refresh;
+  const ifurl = 'https://10.200.160.236:7857/data/data_list?noNavBar=true&access=' + refresh + '&refresh=' + refresh;
   defineProps({
     sessionTimeout: {
       type: Boolean,
