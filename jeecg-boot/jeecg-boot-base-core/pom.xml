@@ -40,6 +40,8 @@
 	</repositories>
 	
 	<dependencies>
+
+
 		<!--jeecg-tools-->
 		<dependency>
 			<groupId>org.jeecgframework.boot</groupId>
