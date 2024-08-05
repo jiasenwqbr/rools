@@ -20,7 +20,7 @@ export const columns: BasicColumn[] = [
   {
     title: '包扩展名',
     align: 'center',
-    dataIndex: 'extends_dictText',
+    dataIndex: 'kuozhanming_dictText',
   },
   {
     title: '版本',
@@ -78,7 +78,7 @@ export const searchFormSchema: FormSchema[] = [
     field: 'extend',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'extends',
+      dictCode: 'kuozhanming',
     },
     //colProps: {span: 6},
   },
@@ -111,7 +111,7 @@ export const formSchema: FormSchema[] = [
     field: 'extend',
     component: 'JDictSelectTag',
     componentProps: {
-      dictCode: 'extends',
+      dictCode: 'kuozhanming',
     },
   },
   {
@@ -138,7 +138,7 @@ export const superQuerySchema = {
   spaceId: { title: '空间', order: 0, view: 'list', type: 'string', dictTable: 'rool_space', dictCode: 'id', dictText: 'space_name' },
   projectId: { title: '项目', order: 1, view: 'list', type: 'string', dictTable: 'rool_project', dictCode: 'id', dictText: 'project_name' },
   pkgName: { title: '包名程', order: 2, view: 'text', type: 'string' },
-  extend: { title: '包扩展名', order: 3, view: 'list', type: 'string', dictCode: 'extends' },
+  extend: { title: '包扩展名', order: 3, view: 'list', type: 'string', dictCode: 'kuozhanming' },
   version: { title: '版本', order: 4, view: 'text', type: 'string' },
   description: { title: '描述', order: 5, view: 'textarea', type: 'string' },
   createBy: { title: '创建人', order: 6, view: 'text', type: 'string' },
